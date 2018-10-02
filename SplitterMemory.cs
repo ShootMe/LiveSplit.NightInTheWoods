@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 namespace LiveSplit.NightInTheWoods {
@@ -20,6 +21,32 @@ namespace LiveSplit.NightInTheWoods {
 		}
 		public string SceneName() {
 			return Path.GetFileNameWithoutExtension(SceneManager.ReadAscii(Program, (IntPtr)SceneManager.Read<uint>(Program, 0x48, 0x18)));
+		}
+		public TransitionState ScreenState() {
+			return (TransitionState)Global.Read<int>(Program, -0x78, 0x78);
+		}
+		public Dictionary<string, string> Variables() {
+			Dictionary<string, string> variables = new Dictionary<string, string>();
+			//Global.continuity.stringVars
+			IntPtr vars = (IntPtr)Global.Read<uint>(Program, -0xf8, 0x20);
+			int count = Program.Read<int>(vars, 0x38);
+			for (int i = 0; i < count; i++) {
+				string key = Program.ReadString((IntPtr)Program.Read<ulong>(vars, 0x20, 0x20 + (i * 8)));
+				string value = Program.ReadString((IntPtr)Program.Read<ulong>(vars, 0x28, 0x20 + (i * 8)));
+				variables.Add(key, value);
+			}
+
+			//Global.continuity.vars
+			vars = (IntPtr)Global.Read<uint>(Program, -0xf8, 0x18);
+			count = Program.Read<int>(vars, 0x38);
+			for (int i = 0; i < count; i++) {
+				string key = Program.ReadString((IntPtr)Program.Read<ulong>(vars, 0x20, 0x20 + (i * 8)));
+				//if (key == "act" || key == "day" || key == "night") {
+					string value = Program.Read<float>(vars, 0x28, 0x20 + (i * 4)).ToString();
+					variables.Add(key, value);
+				//}
+			}
+			return variables;
 		}
 		public bool HookProcess() {
 			IsHooked = Program != null && !Program.HasExited;

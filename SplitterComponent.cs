@@ -15,9 +15,11 @@ namespace LiveSplit.NightInTheWoods {
 		public IDictionary<string, Action> ContextMenuControls { get { return null; } }
 		private static string LOGFILE = "_NightInTheWoods.txt";
 		private Dictionary<LogObject, string> currentValues = new Dictionary<LogObject, string>();
+		private Dictionary<string, string> gameVars = new Dictionary<string, string>();
 		private SplitterMemory mem;
 		private int currentSplit = -1, lastLogCheck = 0;
-		private bool hasLog = false;
+		private bool hasLog = false, lastTransitionOut;
+		private string lastSceneName = "Title";
 		private SplitterSettings settings;
 		private Thread updateLoop;
 		public SplitterComponent(LiveSplitState state) {
@@ -57,26 +59,50 @@ namespace LiveSplit.NightInTheWoods {
 		public void GetValues() {
 			if (!mem.HookProcess()) { return; }
 
+			string scene = mem.SceneName();
+
 			if (Model != null) {
-				HandleSplits();
+				HandleSplits(scene);
 			}
+
+			lastSceneName = string.IsNullOrEmpty(scene) ? lastSceneName : scene;
 
 			LogValues();
 		}
-		private void HandleSplits() {
+		private void HandleSplits(string scene) {
 			bool shouldSplit = false;
 
 			if (currentSplit == -1) {
-				shouldSplit = mem.LastHooked.AddSeconds(5) < DateTime.Now && false;
+				bool transitionOut = mem.ScreenState() == TransitionState.Out;
+				shouldSplit = mem.LastHooked.AddSeconds(5) < DateTime.Now && scene == "Title" && transitionOut && !lastTransitionOut;
+				lastTransitionOut = transitionOut;
 			} else if (Model.CurrentState.CurrentPhase == TimerPhase.Running) {
-				string scene = mem.SceneName();
 				bool loading = mem.Loading();
-
+				Dictionary<string, string> info = mem.Variables();
 				if (currentSplit < Model.CurrentState.Run.Count && currentSplit < settings.Splits.Count) {
 					SplitName split = settings.Splits[currentSplit];
 
 					switch (split) {
-						case SplitName.Level_0_1: shouldSplit = scene == "SquishCreationTutorial"; break;
+						case SplitName.A1D1: shouldSplit = scene == "MaeRoom" && info["act"] == "1" && info["day"] == "1"; break;
+						case SplitName.Part1: shouldSplit = scene == "SectionTitle_Part1"; break;
+						case SplitName.A1D2: shouldSplit = info["act"] == "1" && info["day"] == "2"; break;
+						case SplitName.A1D3: shouldSplit = info["act"] == "1" && info["day"] == "3"; break;
+						case SplitName.Party: shouldSplit = scene == "SectionTitle_TheParty"; break;
+						case SplitName.A1D4: shouldSplit = scene == "AstralAct1Day3" && info["act"] == "1" && info["day"] == "3"; break;
+						case SplitName.Part2: shouldSplit = scene == "SectionTitle_Part2"; break;
+						case SplitName.OldGods: shouldSplit = scene == "SectionTitle_BeaFQ1Intro"; break;
+						case SplitName.A2D1: shouldSplit = info["act"] == "2" && info["day"] == "2"; break;
+						case SplitName.A2D2: shouldSplit = info["act"] == "2" && info["day"] == "3"; break;
+						case SplitName.A2D3: shouldSplit = info["act"] == "2" && info["day"] == "4"; break;
+						case SplitName.A2D4: shouldSplit = info["act"] == "2" && info["day"] == "5"; break;
+						case SplitName.A2D5: shouldSplit = info["act"] == "3" && info["day"] == "1"; break;
+						case SplitName.A3D1: shouldSplit = info["act"] == "3" && info["day"] == "2"; break;
+						case SplitName.A3D2: shouldSplit = info["act"] == "3" && info["day"] == "3"; break;
+						case SplitName.A3D3: shouldSplit = info["act"] == "3" && info["day"] == "4"; break;
+						case SplitName.A3D4: shouldSplit = info["act"] == "3" && info["day"] == "5"; break;
+						case SplitName.A3D5: shouldSplit = info["act"] == "4" && info["day"] == "1"; break;
+						case SplitName.A4D1: shouldSplit = info["act"] == "4" && info["day"] == "2"; break;
+						case SplitName.A4D2: shouldSplit = info["act"] == "4" && info["day"] == "3"; break;
 					}
 				}
 
@@ -112,8 +138,24 @@ namespace LiveSplit.NightInTheWoods {
 
 					switch (key) {
 						case LogObject.CurrentSplit: curr = currentSplit.ToString(); break;
-						case LogObject.SceneName: curr = mem.SceneName(); break;
+						case LogObject.SceneName: curr = lastSceneName; break;
 						case LogObject.Loading: curr = mem.Loading().ToString(); break;
+						case LogObject.ScreenState: curr = mem.ScreenState().ToString(); break;
+						case LogObject.Info:
+							Dictionary<string, string> info = mem.Variables();
+							foreach (KeyValuePair<string, string> pair in info) {
+								string oldVal = string.Empty;
+								if (!gameVars.TryGetValue(pair.Key, out oldVal) || oldVal != pair.Value) {
+									string newVal = pair.Value;
+									gameVars[pair.Key] = pair.Value;
+									if (string.IsNullOrEmpty(oldVal)) { oldVal = string.Empty; }
+									if (string.IsNullOrEmpty(newVal)) { newVal = string.Empty; }
+									int minus = (pair.Key.Length >= 16 ? pair.Key.Length - 14 : 0);
+									WriteLogWithTime(pair.Key + ": ".PadRight(16 - (pair.Key.Length > 16 ? 16 : pair.Key.Length), ' ') + oldVal.PadLeft(25 - (minus > 25 ? 25 : minus), ' ') + " -> " + newVal);
+								}
+							}
+							curr = string.Empty;
+							break;
 						default: curr = string.Empty; break;
 					}
 

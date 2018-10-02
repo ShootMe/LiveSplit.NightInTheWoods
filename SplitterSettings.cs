@@ -110,23 +110,16 @@ namespace LiveSplit.NightInTheWoods {
 			flowMain.Controls.Add(setting);
 			UpdateSplits();
 		}
-		private void btnActSplits_Click(object sender, EventArgs e) {
+		private void btnDefaultSplits_Click(object sender, EventArgs e) {
 			if (Splits.Count > 0 && MessageBox.Show(this, "You already have some splits setup. This will clear anything you have and default in these splits.\r\n\r\nAre you sure you want to continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) {
 				return;
 			}
 
 			Splits.Clear();
-			Splits.Add(SplitName.Level_0_1);
-
-			LoadSettings();
-		}
-		private void btnActAndDaySplits_Click(object sender, EventArgs e) {
-			if (Splits.Count > 0 && MessageBox.Show(this, "You already have some splits setup. This will clear anything you have and default in these splits.\r\n\r\nAre you sure you want to continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) {
-				return;
-			}
-
-			Splits.Clear();
-			Splits.Add(SplitName.Level_0_1);
+			Splits.Add(SplitName.Part1);
+			Splits.Add(SplitName.Party);
+			Splits.Add(SplitName.Part2);
+			Splits.Add(SplitName.OldGods);
 
 			LoadSettings();
 		}

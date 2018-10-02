@@ -26,9 +26,7 @@
 			this.btnAddSplit = new System.Windows.Forms.Button();
 			this.flowMain = new System.Windows.Forms.FlowLayoutPanel();
 			this.flowOptions = new System.Windows.Forms.FlowLayoutPanel();
-			this.lblDefaultSplits = new System.Windows.Forms.Label();
-			this.btnActSplits = new System.Windows.Forms.Button();
-			this.btnActAndDaySplits = new System.Windows.Forms.Button();
+			this.btnDefaultSplits = new System.Windows.Forms.Button();
 			this.flowMain.SuspendLayout();
 			this.flowOptions.SuspendLayout();
 			this.SuspendLayout();
@@ -55,7 +53,7 @@
 			this.flowMain.Location = new System.Drawing.Point(0, 0);
 			this.flowMain.Margin = new System.Windows.Forms.Padding(0);
 			this.flowMain.Name = "flowMain";
-			this.flowMain.Size = new System.Drawing.Size(241, 29);
+			this.flowMain.Size = new System.Drawing.Size(150, 29);
 			this.flowMain.TabIndex = 0;
 			this.flowMain.WrapContents = false;
 			this.flowMain.DragDrop += new System.Windows.Forms.DragEventHandler(this.flowMain_DragDrop);
@@ -66,46 +64,23 @@
 			// 
 			this.flowOptions.AutoSize = true;
 			this.flowOptions.Controls.Add(this.btnAddSplit);
-			this.flowOptions.Controls.Add(this.lblDefaultSplits);
-			this.flowOptions.Controls.Add(this.btnActSplits);
-			this.flowOptions.Controls.Add(this.btnActAndDaySplits);
+			this.flowOptions.Controls.Add(this.btnDefaultSplits);
 			this.flowOptions.Location = new System.Drawing.Point(0, 0);
 			this.flowOptions.Margin = new System.Windows.Forms.Padding(0);
 			this.flowOptions.Name = "flowOptions";
-			this.flowOptions.Size = new System.Drawing.Size(241, 29);
+			this.flowOptions.Size = new System.Drawing.Size(150, 29);
 			this.flowOptions.TabIndex = 0;
 			// 
-			// lblDefaultSplits
+			// btnDefaultSplits
 			// 
-			this.lblDefaultSplits.Location = new System.Drawing.Point(68, 0);
-			this.lblDefaultSplits.Name = "lblDefaultSplits";
-			this.lblDefaultSplits.Size = new System.Drawing.Size(44, 29);
-			this.lblDefaultSplits.TabIndex = 3;
-			this.lblDefaultSplits.Text = "Default:";
-			this.lblDefaultSplits.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// btnActSplits
-			// 
-			this.btnActSplits.AutoSize = true;
-			this.btnActSplits.Location = new System.Drawing.Point(118, 3);
-			this.btnActSplits.Name = "btnActSplits";
-			this.btnActSplits.Size = new System.Drawing.Size(50, 23);
-			this.btnActSplits.TabIndex = 1;
-			this.btnActSplits.Text = "Acts";
-			this.btnActSplits.UseVisualStyleBackColor = true;
-			this.btnActSplits.Click += new System.EventHandler(this.btnActSplits_Click);
-			// 
-			// btnActAndDaySplits
-			// 
-			this.btnActAndDaySplits.AutoSize = true;
-			this.btnActAndDaySplits.Location = new System.Drawing.Point(174, 3);
-			this.btnActAndDaySplits.Name = "btnActAndDaySplits";
-			this.btnActAndDaySplits.Size = new System.Drawing.Size(64, 23);
-			this.btnActAndDaySplits.TabIndex = 2;
-			this.btnActAndDaySplits.Text = "Act & Day";
-			this.btnActAndDaySplits.UseMnemonic = false;
-			this.btnActAndDaySplits.UseVisualStyleBackColor = true;
-			this.btnActAndDaySplits.Click += new System.EventHandler(this.btnActAndDaySplits_Click);
+			this.btnDefaultSplits.AutoSize = true;
+			this.btnDefaultSplits.Location = new System.Drawing.Point(68, 3);
+			this.btnDefaultSplits.Name = "btnDefaultSplits";
+			this.btnDefaultSplits.Size = new System.Drawing.Size(79, 23);
+			this.btnDefaultSplits.TabIndex = 1;
+			this.btnDefaultSplits.Text = "Default Splits";
+			this.btnDefaultSplits.UseVisualStyleBackColor = true;
+			this.btnDefaultSplits.Click += new System.EventHandler(this.btnDefaultSplits_Click);
 			// 
 			// SplitterSettings
 			// 
@@ -117,7 +92,7 @@
 			this.Controls.Add(this.flowMain);
 			this.Margin = new System.Windows.Forms.Padding(0);
 			this.Name = "SplitterSettings";
-			this.Size = new System.Drawing.Size(241, 29);
+			this.Size = new System.Drawing.Size(150, 29);
 			this.Load += new System.EventHandler(this.Settings_Load);
 			this.flowMain.ResumeLayout(false);
 			this.flowMain.PerformLayout();
@@ -132,8 +107,6 @@
 		private System.Windows.Forms.Button btnAddSplit;
 		private System.Windows.Forms.FlowLayoutPanel flowMain;
 		private System.Windows.Forms.FlowLayoutPanel flowOptions;
-		private System.Windows.Forms.Button btnActSplits;
-		private System.Windows.Forms.Label lblDefaultSplits;
-		private System.Windows.Forms.Button btnActAndDaySplits;
+		private System.Windows.Forms.Button btnDefaultSplits;
 	}
 }
