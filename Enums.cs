@@ -28,6 +28,10 @@ namespace LiveSplit.NightInTheWoods {
 		OldGods,
 		[Description("Act 2 - Day 1"), ToolTip("Splits when Act 2 Day 1 is complete")]
 		A2D1,
+		[Description("Act 2 - Day 1 Dream"), ToolTip("Splits when Act 2 Day 1 Dream is complete")]
+		A2D1Dream,
+		[Description("Mechanics"), ToolTip("Splits when Mechanics shows")]
+		Mechanics,
 		[Description("Act 2 - Day 2"), ToolTip("Splits when Act 2 Day 2 is complete")]
 		A2D2,
 		[Description("Act 2 - Day 3"), ToolTip("Splits when Act 2 Day 3 is complete")]

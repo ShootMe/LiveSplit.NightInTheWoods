@@ -88,10 +88,12 @@ namespace LiveSplit.NightInTheWoods {
 						case SplitName.A1D2: shouldSplit = info["act"] == "1" && info["day"] == "2"; break;
 						case SplitName.A1D3: shouldSplit = info["act"] == "1" && info["day"] == "3"; break;
 						case SplitName.Party: shouldSplit = scene == "SectionTitle_TheParty"; break;
-						case SplitName.A1D4: shouldSplit = scene == "AstralAct1Day3" && info["act"] == "1" && info["day"] == "3"; break;
+						case SplitName.A1D4: shouldSplit = scene == "AstralAct1Day3"; break;
 						case SplitName.Part2: shouldSplit = scene == "SectionTitle_Part2"; break;
 						case SplitName.OldGods: shouldSplit = scene == "SectionTitle_BeaFQ1Intro"; break;
-						case SplitName.A2D1: shouldSplit = info["act"] == "2" && info["day"] == "2"; break;
+						case SplitName.A2D1: shouldSplit = scene == "AstralAct2Day1"; break;
+						case SplitName.A2D1Dream: shouldSplit = info["act"] == "2" && info["day"] == "2"; break;
+						case SplitName.Mechanics: shouldSplit = scene == "SectionTitle_GreggFQ2Intro"; break;
 						case SplitName.A2D2: shouldSplit = info["act"] == "2" && info["day"] == "3"; break;
 						case SplitName.A2D3: shouldSplit = info["act"] == "2" && info["day"] == "4"; break;
 						case SplitName.A2D4: shouldSplit = info["act"] == "2" && info["day"] == "5"; break;
@@ -145,7 +147,7 @@ namespace LiveSplit.NightInTheWoods {
 							Dictionary<string, string> info = mem.Variables();
 							foreach (KeyValuePair<string, string> pair in info) {
 								string oldVal = string.Empty;
-								if (!gameVars.TryGetValue(pair.Key, out oldVal) || oldVal != pair.Value) {
+								if (pair.Key != "player_x" && pair.Key != "player_y" && (!gameVars.TryGetValue(pair.Key, out oldVal) || oldVal != pair.Value)) {
 									string newVal = pair.Value;
 									gameVars[pair.Key] = pair.Value;
 									if (string.IsNullOrEmpty(oldVal)) { oldVal = string.Empty; }
