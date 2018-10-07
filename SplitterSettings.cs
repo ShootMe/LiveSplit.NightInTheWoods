@@ -120,6 +120,18 @@ namespace LiveSplit.NightInTheWoods {
 			Splits.Add(SplitName.Party);
 			Splits.Add(SplitName.Part2);
 			Splits.Add(SplitName.OldGods);
+			Splits.Add(SplitName.Mechanics);
+			Splits.Add(SplitName.DinnerAtBeas);
+			Splits.Add(SplitName.Harfest);
+			Splits.Add(SplitName.Part3);
+			Splits.Add(SplitName.Library);
+			Splits.Add(SplitName.Graveyard);
+			Splits.Add(SplitName.Proximity);
+			Splits.Add(SplitName.HistSociety);
+			Splits.Add(SplitName.Part4);
+			Splits.Add(SplitName.HoleInTheCenter);
+			Splits.Add(SplitName.Part5);
+			Splits.Add(SplitName.GoodEnough);
 
 			LoadSettings();
 		}

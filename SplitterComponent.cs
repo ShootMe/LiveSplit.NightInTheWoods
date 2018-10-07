@@ -94,21 +94,31 @@ namespace LiveSplit.NightInTheWoods {
 						case SplitName.A2D1: shouldSplit = scene == "AstralAct2Day1"; break;
 						case SplitName.A2D1Dream: shouldSplit = info["act"] == "2" && info["day"] == "2"; break;
 						case SplitName.Mechanics: shouldSplit = scene == "SectionTitle_GreggFQ2Intro"; break;
-						case SplitName.A2D2: shouldSplit = info["act"] == "2" && info["day"] == "3"; break;
-						case SplitName.A2D3: shouldSplit = info["act"] == "2" && info["day"] == "4"; break;
-						case SplitName.A2D4: shouldSplit = info["act"] == "2" && info["day"] == "5"; break;
-						case SplitName.A2D5: shouldSplit = info["act"] == "3" && info["day"] == "1"; break;
-						case SplitName.A3D1: shouldSplit = info["act"] == "3" && info["day"] == "2"; break;
-						case SplitName.A3D2: shouldSplit = info["act"] == "3" && info["day"] == "3"; break;
+						case SplitName.A2D2: shouldSplit = scene == "AstralAct2Day2"; break;
+						case SplitName.A2D2Dream: shouldSplit = info["act"] == "2" && info["day"] == "3"; break;
+						case SplitName.DinnerAtBeas: shouldSplit = scene == "SectionTitle_BeaFQ3Intro"; break;
+						case SplitName.A2D3: shouldSplit = scene == "AstralAct2Day3"; break;
+						case SplitName.A2D3Dream: shouldSplit = info["act"] == "2" && info["day"] == "4"; break;
+						case SplitName.Harfest: shouldSplit = scene == "SectionTitle_Harfest"; break;
+						case SplitName.Part3: shouldSplit = scene == "SectionTitle_Part3"; break;
+						case SplitName.Library: shouldSplit = scene == "SectionTitle_TheLibrary"; break;
+						case SplitName.A3D1: shouldSplit = scene == "AstralAct3Day1"; break;
+						case SplitName.A3D1Dream: shouldSplit = info["act"] == "3" && info["day"] == "2"; break;
+						case SplitName.Graveyard: shouldSplit = scene == "SectionTitle_BeaIQ"; break;
+						case SplitName.A3D2: shouldSplit = scene == "AstralAct3Day2"; break;
+						case SplitName.A3D2Dream: shouldSplit = info["act"] == "3" && info["day"] == "3"; break;
+						case SplitName.Proximity: shouldSplit = scene == "SectionTitle_BeaFQ4Intro"; break;
 						case SplitName.A3D3: shouldSplit = info["act"] == "3" && info["day"] == "4"; break;
-						case SplitName.A3D4: shouldSplit = info["act"] == "3" && info["day"] == "5"; break;
-						case SplitName.A3D5: shouldSplit = info["act"] == "4" && info["day"] == "1"; break;
+						case SplitName.HistSociety: shouldSplit = scene == "SectionTitle_GreggIQ"; break;
+						case SplitName.Part4: shouldSplit = scene == "SectionTitle_Part4"; break;
 						case SplitName.A4D1: shouldSplit = info["act"] == "4" && info["day"] == "2"; break;
-						case SplitName.A4D2: shouldSplit = info["act"] == "4" && info["day"] == "3"; break;
+						case SplitName.HoleInTheCenter: shouldSplit = scene == "SectionTitle_TheDark"; break;
+						case SplitName.Part5: shouldSplit = scene == "SectionTitle_Part5"; break;
+						case SplitName.GoodEnough: shouldSplit = scene == "EndCredits"; break;
 					}
 				}
 
-				Model.CurrentState.IsGameTimePaused = Model.CurrentState.CurrentPhase != TimerPhase.Running || loading;
+				Model.CurrentState.IsGameTimePaused = Model.CurrentState.CurrentPhase != TimerPhase.Running || loading || scene == "TransitionScene";
 			}
 
 			HandleSplit(shouldSplit, false);

@@ -12,7 +12,7 @@ namespace LiveSplit.NightInTheWoods {
 		ManualSplit,
 		[Description("Act 1 - Day 1"), ToolTip("Splits when Act 1 Day 1 is complete")]
 		A1D1,
-		[Description("Part 1 - Home Again"), ToolTip("Splits when Part 1 shows")]
+		[Description("Part 1 - Home Again"), ToolTip("Splits when Part 1 - Home Again shows")]
 		Part1,
 		[Description("Act 1 - Day 2"), ToolTip("Splits when Act 1 Day 2 is complete")]
 		A1D2,
@@ -22,7 +22,7 @@ namespace LiveSplit.NightInTheWoods {
 		Party,
 		[Description("Act 1 - Day 4"), ToolTip("Splits when Act 1 Day 4 is complete")]
 		A1D4,
-		[Description("Part 2 - Weird Autumn"), ToolTip("Splits when Part 2 shows")]
+		[Description("Part 2 - Weird Autumn"), ToolTip("Splits when Part 2 - Weird Autumn shows")]
 		Part2,
 		[Description("Old Gods Fort Lucenne Mall"), ToolTip("Splits when Old Gods of the Fort Lucenne Mall shows")]
 		OldGods,
@@ -34,26 +34,46 @@ namespace LiveSplit.NightInTheWoods {
 		Mechanics,
 		[Description("Act 2 - Day 2"), ToolTip("Splits when Act 2 Day 2 is complete")]
 		A2D2,
+		[Description("Act 2 - Day 2 Dream"), ToolTip("Splits when Act 2 Day 2 Dream is complete")]
+		A2D2Dream,
+		[Description("Dinner At Bea's"), ToolTip("Splits when Dinner At Beas shows")]
+		DinnerAtBeas,
 		[Description("Act 2 - Day 3"), ToolTip("Splits when Act 2 Day 3 is complete")]
 		A2D3,
-		[Description("Act 2 - Day 4"), ToolTip("Splits when Act 2 Day 4 is complete")]
-		A2D4,
-		[Description("Act 2 - Day 5"), ToolTip("Splits when Act 2 Day 5 is complete")]
-		A2D5,
+		[Description("Act 2 - Day 3 Dream"), ToolTip("Splits when Act 2 Day 3 Dream is complete")]
+		A2D3Dream,
+		[Description("Harfest"), ToolTip("Splits when Harfest shows")]
+		Harfest,
+		[Description("Part 3 - The Long Fall"), ToolTip("Splits when Part 3 - The Long Fall shows")]
+		Part3,
+		[Description("The Library"), ToolTip("Splits when The Library shows")]
+		Library,
 		[Description("Act 3 - Day 1"), ToolTip("Splits when Act 3 Day 1 is complete")]
 		A3D1,
+		[Description("Act 3 - Day 1 Dream"), ToolTip("Splits when Act 3 Day 1 Dream is complete")]
+		A3D1Dream,
+		[Description("The Graveyard"), ToolTip("Splits when The Graveyard shows")]
+		Graveyard,
 		[Description("Act 3 - Day 2"), ToolTip("Splits when Act 3 Day 2 is complete")]
 		A3D2,
+		[Description("Act 3 - Day 2 Dream"), ToolTip("Splits when Act 3 Day 2 Dream is complete")]
+		A3D2Dream,
+		[Description("Proximity"), ToolTip("Splits when Proximity shows")]
+		Proximity,
 		[Description("Act 3 - Day 3"), ToolTip("Splits when Act 3 Day 3 is complete")]
 		A3D3,
-		[Description("Act 3 - Day 4"), ToolTip("Splits when Act 3 Day 4 is complete")]
-		A3D4,
-		[Description("Act 3 - Day 5"), ToolTip("Splits when Act 3 Day 5 is complete")]
-		A3D5,
+		[Description("The Historical Society"), ToolTip("Splits when The Historical Society Shows")]
+		HistSociety,
+		[Description("Part 4 - The End Of Everything"), ToolTip("Splits when Part 4 - The End Of Everything Shows")]
+		Part4,
 		[Description("Act 4 - Day 1"), ToolTip("Splits when Act 4 Day 1 is complete")]
 		A4D1,
-		[Description("Act 4 - Day 2"), ToolTip("Splits when Act 4 Day 2 is complete")]
-		A4D2
+		[Description("The Hole In The Center Of Everything"), ToolTip("Splits when The Hole In The Center Of Everything Shows")]
+		HoleInTheCenter,
+		[Description("Epilogue - Stars"), ToolTip("Splits when Epilogue - Stars Shows")]
+		Part5,
+		[Description("Good Enough"), ToolTip("Splits when you finish dialog of Good Enough")]
+		GoodEnough
 	}
 	public enum TransitionState {
 		None,

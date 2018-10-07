@@ -41,10 +41,14 @@ namespace LiveSplit.NightInTheWoods {
 			count = Program.Read<int>(vars, 0x38);
 			for (int i = 0; i < count; i++) {
 				string key = Program.ReadString((IntPtr)Program.Read<ulong>(vars, 0x20, 0x20 + (i * 8)));
-				//if (key == "act" || key == "day" || key == "night") {
+				if (key == "act" || key == "day" || key == "night") {
 					string value = Program.Read<float>(vars, 0x28, 0x20 + (i * 4)).ToString();
-					variables.Add(key, value);
-				//}
+					if (!variables.ContainsKey(key)) {
+						variables.Add(key, value);
+					} else {
+						variables[key] = value;
+					}
+				}
 			}
 			return variables;
 		}
