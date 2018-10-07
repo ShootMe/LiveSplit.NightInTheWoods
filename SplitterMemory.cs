@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 namespace LiveSplit.NightInTheWoods {
 	public partial class SplitterMemory {
 		private static ProgramPointer Global = new ProgramPointer(AutoDeref.Single, DerefType.Int32, new ProgramSignature(PointerVersion.Steam, "55488BEC564883EC78488BF1B8????????488930488BCE4883EC20", 13));
@@ -21,6 +22,29 @@ namespace LiveSplit.NightInTheWoods {
 		}
 		public string SceneName() {
 			return Path.GetFileNameWithoutExtension(SceneManager.ReadAscii(Program, (IntPtr)SceneManager.Read<uint>(Program, 0x48, 0x18)));
+		}
+		public SpeechBubbleState DialogState() {
+			return (SpeechBubbleState)Global.Read<int>(Program, -0xc8, 0x28, 0x38, 0x74);
+		}
+		public string DialogText() {
+			//Global.dialogue.implementation.speechbubble.spritetext.textCharacterLines
+			IntPtr lines = (IntPtr)Global.Read<uint>(Program, -0xc8, 0x28, 0x38, 0x20, 0x78);
+			int count = Program.Read<int>(lines, 0x18);
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < count; i++) {
+				DialogText((IntPtr)Program.Read<ulong>(lines, 0x10, 0x20 + (i * 8)), sb);
+			}
+			if (sb.Length > 1) {
+				sb.Length -= 2;
+			}
+			return sb.ToString();
+		}
+		public void DialogText(IntPtr address, StringBuilder sb) {
+			int count = Program.Read<int>(address, 0x18);
+			for (int i = 0; i < count; i++) {
+				sb.Append((char)Program.Read<short>(address, 0x10, 0x20 + (i * 8), 0x10));
+			}
+			sb.AppendLine();
 		}
 		public TransitionState ScreenState() {
 			return (TransitionState)Global.Read<int>(Program, -0x78, 0x78);

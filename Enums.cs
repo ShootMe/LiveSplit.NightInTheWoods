@@ -5,7 +5,16 @@ namespace LiveSplit.NightInTheWoods {
 		SceneName,
 		Loading,
 		Info,
-		ScreenState
+		ScreenState,
+		Dialog,
+		DialogState
+	}
+	public enum SpeechBubbleState {
+		Opening,
+		Scrolling,
+		Ready,
+		Closing,
+		Closed
 	}
 	public enum SplitName {
 		[Description("Manual Split"), ToolTip("Does not split automatically. Use this for custom splits not yet defined.")]

@@ -114,7 +114,10 @@ namespace LiveSplit.NightInTheWoods {
 						case SplitName.A4D1: shouldSplit = info["act"] == "4" && info["day"] == "2"; break;
 						case SplitName.HoleInTheCenter: shouldSplit = scene == "SectionTitle_TheDark"; break;
 						case SplitName.Part5: shouldSplit = scene == "SectionTitle_Part5"; break;
-						case SplitName.GoodEnough: shouldSplit = scene == "EndCredits"; break;
+						case SplitName.GoodEnough:
+							SpeechBubbleState state = mem.DialogState();
+							shouldSplit = scene == "BandPractice" && (state == SpeechBubbleState.Closing || state == SpeechBubbleState.Closed) && mem.DialogText().Equals("GOOD ENOUGH.", StringComparison.OrdinalIgnoreCase);
+							break;
 					}
 				}
 
@@ -153,6 +156,8 @@ namespace LiveSplit.NightInTheWoods {
 						case LogObject.SceneName: curr = lastSceneName; break;
 						case LogObject.Loading: curr = mem.Loading().ToString(); break;
 						case LogObject.ScreenState: curr = mem.ScreenState().ToString(); break;
+						case LogObject.Dialog: curr = mem.DialogText(); break;
+						case LogObject.DialogState: curr = mem.DialogState().ToString(); break;
 						case LogObject.Info:
 							Dictionary<string, string> info = mem.Variables();
 							foreach (KeyValuePair<string, string> pair in info) {
